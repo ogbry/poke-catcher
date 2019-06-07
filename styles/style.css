@@ -57,7 +57,7 @@ label{
     font-size: 2em;
     font-family: 'VT323', monospace;
 }
-.header button{
+button{
     font-size: 2em;
     border: none;
     cursor: pointer;
@@ -66,6 +66,9 @@ label{
     color: white;
     font-family: 'VT323', monospace;
     outline-style: outset;
+}
+em{
+    font-size: 1.2em;
 }
 .text-wrapper{
     display: flex;
@@ -88,6 +91,7 @@ label{
     height: 65vh;
     overflow: auto;
     border-radius: 10px 10px 0px 0px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
 }
 .box-header{
     border: solid 0.1px;
@@ -105,4 +109,42 @@ label{
     overflow: auto;
     background-color: rgba(232, 230, 255, 0.808);
     opacity: 0.8;
+}
+.box-content .box-encountered{
+    height: 25vh;
+}
+.box-content .box-details{
+    height: 25vh;
+}
+.left .box-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+h1{
+    font-size: 2.8rem;
+    border-bottom: solid 1px;
+    width: 200px;
+}
+.left .box-encountered img{
+    width: 150px;
+
+}
+.box-details ul{
+    font-size: 2rem;
+    color: black;
+}
+.right .box-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.box-content img{
+    width: 150px;
+}
+.right .box-content p{
+    font-size: 2.5rem;
 }
