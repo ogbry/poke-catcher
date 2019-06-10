@@ -27,11 +27,11 @@
                 </div>
                 <div class="header-drop-down">
                     <label for="">Region:</label>
-                    <select id="region">
+                    <select id="region" onchange="getLocations(this.value)">
                         
                     </select>
                     <label for="">Location:</label>
-                    <select id="location">
+                    <select id="location" onchange="getAreas(this.value)">
                         
                     </select>
                     <label for="">Area:</label>
@@ -55,17 +55,17 @@
                     </div>
                     <div class="box-content">
                         <div class="box-encountered">
-                            <h1>You found a: </h1>
+                            <!-- <h1>You found a: </h1>
                             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/72.png" alt="">
-                            
+                             -->
                         </div>
                         <div class="box-details">
-                            <h1>Details: </h1>
+                            <!-- <h1>Details: </h1>
                             <ul>
                                 <li>Supot</li>
                                 <li>Malangsa</li>
                                 <li>Magatol</li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                         <p>CAPTURED</p>
                     </div>
                     <div class="box-content">
-                        <div class="image">
+                        <!-- <div class="image">
                             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/72.png" alt="">
                         </div>
                         <div class="name">
@@ -109,7 +109,7 @@
                         </div>
                         <div class="name">
                             <p>Name</p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
