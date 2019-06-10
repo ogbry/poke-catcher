@@ -31,15 +31,34 @@ $(document).ready(function(){
 
 });
 
-function getLocation(url){
 
-  return fetch(url)
-  .then(function(response) {
-    return response.json();
-  })
+function getLocations(regions){
 
+  return fetch(regions)
+      .then(function(response){
+
+          return response.json();
+
+      })
+      .then(function(regions){
+
+          let regionName = region.name;
+          let locationsArr = region.locations;
+          locationsArr.forEach(element => {
+             
+              let locationList = $(
+                `             
+                <option value="${element.name}">${element.name}</option>
+                
+                `
+              )
+
+              $('#location').prepend(locationList);
+                console.log('asdsad')
+          });
+        
+      })
 }
-
 
 function region(url){
 
