@@ -1,0 +1,91 @@
+body{
+    /* background-image: url('/images/Opelucid_City_anime.png'); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100vh;
+}
+.header{
+    border: solid 1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+.body-cont{
+    border: solid 1px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+.loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.loader-img{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.play-btn{
+    cursor: pointer;
+}
+.catcher{
+    display: flex;
+    align-self: flex-start;
+    width: 300px;
+}
+.catcher img{
+    width: 500px;
+    margin-left: 250px;
+    margin-top: -50px;
+    
+}
+.capture-btn{
+    margin-right: 200px;
+    width: 350px;
+    cursor: pointer;
+}
+.details{
+    display: flex;
+    flex-direction: column;
+    border: solid 1px;
+    margin-left: 200px;
+    width: 400px;
+    height: 300px;
+    align-self: center;
+}
+.one{
+    display: flex;
+    justify-content: space-between;
+    border: solid 1px;
+    height: 350px;
+}
+.two{
+    display: flex;
+    justify-content: space-between;
+    border: solid 1px;
+}
+.captured{
+    border: solid 1px;
+    width: 850px;
+    display: flex;
+    align-self: center;
+    margin-right: 50px;
+    
+}
+.captured-details{
+    border: solid 1px;
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    margin: 20px;
+}
+.select{
+    display: flex;
+    align-items: center;
+}
