@@ -91,7 +91,6 @@ body{
     justify-content: space-between;
 }
 .captured{
-    border: solid 1px;
     width: 850px;
     display: flex;
     align-self: center;
@@ -99,7 +98,6 @@ body{
     
 }
 .captured-details{
-    border: solid 1px;
     display: flex;
     flex-direction: column;
     height: 100px;
