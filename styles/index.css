@@ -7,14 +7,13 @@ body{
     height: 100vh;
 }
 .header{
-    border: solid 1px;
+    border-bottom: solid 2px #999;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
 }
 .body-cont{
-    border: solid 1px;
     display: flex;
     flex-direction: column;
     padding: 30px;
@@ -31,9 +30,6 @@ body{
     justify-content: center;
     align-items: center;
 }
-.play-btn{
-    cursor: pointer;
-}
 .catcher{
     display: flex;
     align-self: flex-start;
@@ -43,32 +39,56 @@ body{
     width: 500px;
     margin-left: 250px;
     margin-top: -50px;
-    
 }
 .capture-btn{
-    margin-right: 200px;
-    width: 350px;
+    margin-right: 220px;
+    width: 270px;
+    cursor: grab;
+    z-index: 1;
+}
+
+.play-btn{
     cursor: pointer;
 }
 .details{
-    display: flex;
-    flex-direction: column;
-    border: solid 1px;
+    border: solid 5px lightslategray;
     margin-left: 200px;
+    border-radius: 20px;
     width: 400px;
     height: 300px;
-    align-self: center;
+    padding: 20px;
+}
+.details .name-header{
+    font-size: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    letter-spacing: 8px;
+    margin-bottom: 20px;
+}
+.details .poke-details{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 5px;
+    margin: 7px;
+    display: flex;
+    flex-direction: column;
+}
+.poke-details span{
+    margin-bottom: 15px;
 }
 .one{
     display: flex;
     justify-content: space-between;
-    border: solid 1px;
     height: 350px;
+    
+}
+.encountered{
+    text-align: center;
+    z-index: 1;
 }
 .two{
     display: flex;
     justify-content: space-between;
-    border: solid 1px;
 }
 .captured{
     border: solid 1px;
@@ -89,3 +109,53 @@ body{
     display: flex;
     align-items: center;
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 120px;
+    margin-bottom: 50px;
+  }
+  .tooltip img{
+      width: 100px;
+      cursor: pointer;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 60%;
+    left: 10%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+

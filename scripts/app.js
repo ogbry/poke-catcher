@@ -1,7 +1,8 @@
-window.onload = function(){
+
 $(document).ready(function(){
     
     //Intro Loading
+
     $('body').css('background-image', 'url("/images/Opelucid_City_anime.png")');
     $('.loader').hide()
     $('.player').hide()
@@ -20,12 +21,17 @@ $(document).ready(function(){
         $(this).css('transform', 'scale(1)')
     })
 
+    //-------------------------------------------------------------
+
     var regionSelect = document.querySelector('.region-select')
     var locationSelect = document.querySelector('.location-select')
     var areaSelect = document.querySelector('.area-select')
     var exploreBtn = document.querySelector('.explore-btn')
-
-
+    var appendEncounter = document.querySelector('.new')
+    var detailsBox = document.querySelector('.details')
+    var triggerCapture = document.querySelector('.capture')
+    var pokemonsOwned = [];
+    
     //API
     getData('https://pokeapi.co/api/v2/region/')
     .then(function(region){
@@ -67,7 +73,7 @@ $(document).ready(function(){
             getData(`${$('.location-select').val()}`)
             .then(function(areaList){
                 areaSelect.innerHTML= ""
-
+                console.log(areaList)
                 areaList.areas.forEach(elemArea => {
 
                     var areaOption = document.createElement('option')
@@ -81,30 +87,125 @@ $(document).ready(function(){
             })
         })
 
-        $('.capture-btn').mouseover(function(){
-            $(this).css('transform', 'scale(1.3)')
-        })
-        $('.capture-btn').mouseout(function(e){
-            $(this).css('transform', 'scale(1)')
-        })
-
         exploreBtn.addEventListener('click', function(){
             getData(`${$('.area-select').val()}`)
             .then(function(pokeData){
-                console.log(pokeData)
-                console.log(pokeData.pokemon_encounters.length)
+                appendEncounter.innerHTML= ""
+                detailsBox.innerHTML=""
+                document.querySelector('.tooltiptext').innerHTML = "Capture "
+                var randomNum = Math.floor((Math.random() * pokeData.pokemon_encounters.length -1) + 1)
 
-                pokeData.pokemon_encounters.forEach(pokeElement => {
-
-                    console.log(pokeElement.pokemon)
-                    getData(`${pokeElement.pokemon.url}`)
-                    .then(function(pokeDetails){
-                        console.log(pokeDetails)
+                
+                getData(`${pokeData.pokemon_encounters[randomNum].pokemon.url}`)
+                .then(function(encPoke){
+                    
+                    var stats = [];
+                    encPoke.stats.map(statElem =>{
+                        stats.push(statElem.base_stat)
                     })
+                    
+                    var capImage = document.createElement('img')
+                    capImage.setAttribute('class', 'capture-btn')
+                    capImage.setAttribute('data-id', `${encPoke.name}`)
+                    capImage.setAttribute('data-src', `${encPoke.sprites.front_default}`)
+                    
+                    capImage.setAttribute('src', `${encPoke.sprites.front_default}`)
+                    console.log(stats)
 
-                });
+                    var spanDiv = document.createElement('div')
+                    var headerDiv = document.createElement('div')
+
+                    headerDiv.setAttribute('class', 'name-header')
+                    spanDiv.setAttribute('class', 'poke-details')
+
+                    var capSpan = document.createElement('span')
+                    var capSpan1 = document.createElement('span')
+                    var capSpan2 = document.createElement('span')
+                    var capSpan3 = document.createElement('span')
+                    var capSpan4 = document.createElement('span')
+                    var capSpan5 = document.createElement('span')
+                    var capSpanHeader = document.createElement('span')
+                    var pokeName = document.createElement('span')
+
+                    capSpan.innerText += `Speed: ${stats[0]}`
+                    capSpan1.innerText = `Special Defense: ${stats[1]}`
+                    capSpan2.innerText = `Special Attack: ${stats[2]}`
+                    capSpan3.innerText = `Defense: ${stats[3]}`
+                    capSpan4.innerText = `Defense: ${stats[4]}`
+                    capSpan5.innerText = `HP: ${stats[5]}`
+                    pokeName.innerText = `${encPoke.name}`.toUpperCase();
+
+                    capSpanHeader.innerText = `${encPoke.name}`.toUpperCase()
+                    
+
+                    spanDiv.appendChild(capSpan)
+                    spanDiv.appendChild(capSpan1)
+                    spanDiv.appendChild(capSpan2)
+                    spanDiv.appendChild(capSpan3)
+                    spanDiv.appendChild(capSpan4)
+                    spanDiv.appendChild(capSpan5)
+
+                    document.querySelector('.tooltiptext').append(pokeName)
+
+                    headerDiv.append(capSpanHeader)
+                    detailsBox.append(headerDiv)
+                    detailsBox.append(spanDiv)
+                    appendEncounter.append(capImage)
+                })
+
+            })
+
+        })
+
+        triggerCapture.addEventListener('click', function(){
+
+            
+            document.querySelector('.tooltiptext').innerHTML = "Capture "
+
+            console.log($('.capture-btn').data('id'))
+            console.log($('.capture-btn').data('src'))
+            
+            var pokeObj = {
+                name: $('.capture-btn').data('id'),
+                imgUrl: $('.capture-btn').data('src')
+            }
+
+            pokemonsOwned.push(pokeObj)
+            detailsBox.innerHTML=""
+            document.querySelector('.new').innerHTML = ""
+            
+            console.log(pokemonsOwned)
+            pokemonsOwned.map(pokemonMap => {
+
+                var mainDiv = document.createElement('div')
+                mainDiv.setAttribute('class', 'captured-details')
+                var firstChildDiv = document.createElement('div')
+                var secondChildDiv = document.createElement('div')
+                secondChildDiv.setAttribute('style', 'border: solid 1px; text-align: center;')
+                var headImg = document.createElement('img')
+                headImg.setAttribute('src', `${pokemonMap.imgUrl}`)
+
+                firstChildDiv.append(headImg)
+
+                var spanBtm = document.createElement('span')
+                spanBtm.innerText = `${pokemonMap.name}`.toUpperCase()
+
+                secondChildDiv.append(spanBtm)
+
+                mainDiv.append(firstChildDiv)
+                mainDiv.append(secondChildDiv)
+                
+                document.querySelector('.captured').append(mainDiv)
+
+            
             })
         })
+
+
+        
+
+        
+
         
     }).catch(function(err){
         console.log("API NOT FOUND")
@@ -117,6 +218,6 @@ $(document).ready(function(){
         return response.json();
         })
     }
+    
 
 })
-}
