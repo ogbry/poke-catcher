@@ -197,4 +197,29 @@ select{
     visibility: visible;
     opacity: 1;
   }
+.capture{
+    -webkit-animation: mymove 2s infinite;  /* Chrome, Safari, Opera */
+    animation: mymove 2s;
+}
 
+@-webkit-keyframes mymove {
+    from {left: 0px;}
+    to {right: 200px;}
+  }
+  
+  @keyframes mymove {
+    from {left: 0px;}
+    to {right: 200px;}
+  }
+  
+  /* Chrome, Safari, Opera */
+  @-webkit-keyframes myNEWmove {
+    from {width: 0px;}
+  }
+  
+  @keyframes myNEWmove {
+    from {width: 0px;}
+  }
+
+
+  
