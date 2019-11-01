@@ -94,7 +94,10 @@ body{
     width: 850px;
     display: flex;
     align-self: center;
-    margin-right: 50px;
+    margin-right: 20px;
+    border: solid 2px lightslategray;
+    border-radius: 20px;
+    padding: 10px;
     
 }
 .captured-details{
@@ -106,6 +109,13 @@ body{
 .select{
     display: flex;
     align-items: center;
+    font-size: 20px;
+}
+select{
+    font-size: 20px;
+    padding: 5px;
+    margin: 5px;
+    width: 200px;
 }
 
 .tooltip {
@@ -140,7 +150,17 @@ body{
     transition: opacity 0.3s;
     
   }
-  
+  .emptyDiv{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+  }
+  .emptyDiv span{
+      font-size: 27px;
+      letter-spacing: 5px;
+      color: whitesmoke;
+  }
   .tooltip .tooltiptext::after {
     content: "";
     position: absolute;

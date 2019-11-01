@@ -8,10 +8,24 @@ $(document).ready(function(){
     $('.player').hide()
     $(".loader").fadeIn(3000);
     
+
+    var loader = document.querySelector('.sound-intro')
     $('.play-btn').click(function(){
         $(".loader").fadeOut(500);
         $('body').css('background-image', 'url("/images/bg2.png")')
         $('.player').show();
+
+        var soundBattle = document.querySelector('.sound-battle')
+        var audio = document.createElement('audio')
+        audio.setAttribute('autoplay', 'true')
+        var source = document.createElement('source')
+        source.setAttribute('src', 'http://23.237.126.42/ost/pokemon-gameboy-sound-collection/gbhogmtx/107-battle%20%28vs%20wild%20pokemon%29.mp3')
+        source.setAttribute('type', 'audio/ogg')
+
+        audio.appendChild(source)
+
+        soundBattle.append(audio)
+        $('.intro-bmg').remove()
     })
     
     $('.play-btn').mouseover(function(){
@@ -19,8 +33,19 @@ $(document).ready(function(){
     })
     $('.play-btn').mouseout(function(e){
         $(this).css('transform', 'scale(1)')
-    })
+        
 
+        
+    })
+    document.querySelector('.details').style.borderColor = "transparent";
+    var triggerCapture = document.querySelector('.capture')
+    triggerCapture.style.display ="none"
+    
+
+    
+        
+    
+    
     //-------------------------------------------------------------
 
     var regionSelect = document.querySelector('.region-select')
@@ -29,7 +54,7 @@ $(document).ready(function(){
     var exploreBtn = document.querySelector('.explore-btn')
     var appendEncounter = document.querySelector('.new')
     var detailsBox = document.querySelector('.details')
-    var triggerCapture = document.querySelector('.capture')
+
     var pokemonsOwned = [];
     
     //API
@@ -48,7 +73,8 @@ $(document).ready(function(){
         });
 
         regionSelect.addEventListener('change', function(){
-
+            document.querySelector('.captured').style.borderColor = "transparent";
+            document.querySelector('.emptyDiv').style.display = 'none'
             getData(`${$('.region-select').val()}`)
             .then(function(location){
                 let locArr = location.locations
@@ -88,6 +114,10 @@ $(document).ready(function(){
         })
 
         exploreBtn.addEventListener('click', function(){
+
+            document.querySelector('.capture-bmg').innerHTML =""
+            triggerCapture.style.display = ""
+            document.querySelector('.details').style.borderColor = "lightslategray";
             getData(`${$('.area-select').val()}`)
             .then(function(pokeData){
                 appendEncounter.innerHTML= ""
@@ -158,55 +188,82 @@ $(document).ready(function(){
         })
 
         triggerCapture.addEventListener('click', function(){
-
             
-            document.querySelector('.tooltiptext').innerHTML = "Capture "
-
-            console.log($('.capture-btn').data('id'))
-            console.log($('.capture-btn').data('src'))
             
-            var pokeObj = {
-                name: $('.capture-btn').data('id'),
-                imgUrl: $('.capture-btn').data('src')
+            if(pokemonsOwned.length > 5) {
+                alert('Your Pokebag is full')
             }
+            else{
 
-            pokemonsOwned.push(pokeObj)
-            detailsBox.innerHTML=""
-            document.querySelector('.new').innerHTML = ""
-            
-            console.log(pokemonsOwned)
-            pokemonsOwned.map(pokemonMap => {
+                triggerCapture.style.display ="none"
+                document.querySelector('.captured').style.borderColor = "lightslategray";
+                document.querySelector('.details').style.borderColor = "transparent";
+                document.querySelector('.tooltiptext').innerHTML = "Capture "
 
-                var mainDiv = document.createElement('div')
-                mainDiv.setAttribute('class', 'captured-details')
-                var firstChildDiv = document.createElement('div')
-                var secondChildDiv = document.createElement('div')
-                secondChildDiv.setAttribute('style', 'border: solid 1px; text-align: center;')
-                var headImg = document.createElement('img')
-                headImg.setAttribute('src', `${pokemonMap.imgUrl}`)
-
-                firstChildDiv.append(headImg)
-
-                var spanBtm = document.createElement('span')
-                spanBtm.innerText = `${pokemonMap.name}`.toUpperCase()
-
-                secondChildDiv.append(spanBtm)
-
-                mainDiv.append(firstChildDiv)
-                mainDiv.append(secondChildDiv)
+                console.log($('.capture-btn').data('id'))
+                console.log($('.capture-btn').data('src'))
                 
-                document.querySelector('.captured').append(mainDiv)
+                var pokeObj = {
+                    name: $('.capture-btn').data('id'),
+                    imgUrl: $('.capture-btn').data('src')
+                }
 
+                pokemonsOwned.push(pokeObj)
+                detailsBox.innerHTML=""
+                document.querySelector('.captured').innerHTML=""
+                document.querySelector('.new').innerHTML = ""
+                
+                console.log(pokemonsOwned)
+                
+                pokemonsOwned.map(pokemonMap => {
+                    var mainDiv = document.createElement('div')
+                    mainDiv.setAttribute('class', 'captured-details')
+                    var firstChildDiv = document.createElement('div')
+                    var secondChildDiv = document.createElement('div')
+                    secondChildDiv.setAttribute('style', 'text-align: center;')
+                    var headImg = document.createElement('img')
+                    headImg.setAttribute('src', `${pokemonMap.imgUrl}`)
+                    
+                    firstChildDiv.append(headImg)
+    
+                    var spanBtm = document.createElement('span')
+                    spanBtm.innerText = `${pokemonMap.name}`.toUpperCase()
+    
+                    secondChildDiv.append(spanBtm)
+    
+                    mainDiv.append(firstChildDiv)
+                    mainDiv.append(secondChildDiv)
+                    
+                    document.querySelector('.captured').append(mainDiv)
+
+                    var audio = document.createElement('audio')
+                    audio.setAttribute('autoplay', 'true')
+                    var source = document.createElement('source')
+                    source.setAttribute('src', 'http://23.237.126.42/ost/pokemon-gameboy-sound-collection/gjqttmbp/108-victory%20%28vs%20wild%20pokemon%29.mp3')
+                    source.setAttribute('type', 'audio/ogg')
+
+                    audio.appendChild(source)
+
+                    document.querySelector('.capture-bmg').append(audio)
+                    document.querySelector('.sound-battle').innerHTML =""
+                })
+            }
             
-            })
         })
 
+        if(pokemonsOwned.length == 0){
+            var emtpyDiv = document.createElement('div')
+            emtpyDiv.setAttribute('class', 'emptyDiv')
+            var emptySpan = document.createElement('span')
 
+            emptySpan.innerText = "Explore Pokemons, Select a Region!"
+
+            emtpyDiv.append(emptySpan)
+
+            document.querySelector('.captured').append(emtpyDiv)
+        }
         
 
-        
-
-        
     }).catch(function(err){
         console.log("API NOT FOUND")
     })
