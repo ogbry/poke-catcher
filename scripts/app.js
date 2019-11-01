@@ -73,6 +73,8 @@ $(document).ready(function(){
         });
 
         regionSelect.addEventListener('change', function(){
+            exploreBtn.style.visibility = ""
+
             document.querySelector('.captured').style.borderColor = "transparent";
             document.querySelector('.emptyDiv').style.display = 'none'
             getData(`${$('.region-select').val()}`)
@@ -113,8 +115,31 @@ $(document).ready(function(){
             })
         })
 
-        exploreBtn.addEventListener('click', function(){
+        if($('.area-select').val() ==null){
+            exploreBtn.style.visibility = "hidden"
+        }
 
+        exploreBtn.addEventListener('click', function(){
+            
+
+            if($('.area-select').val() == null){
+                alert('No selected Area')
+            }
+            
+            else{
+                var soundBattle = document.querySelector('.sound-battle')
+            soundBattle.innerHTML =""
+            var audio = document.createElement('audio')
+            audio.setAttribute('autoplay', 'true')
+            var source = document.createElement('source')
+            source.setAttribute('src', 'http://23.237.126.42/ost/pokemon-gameboy-sound-collection/gbhogmtx/107-battle%20%28vs%20wild%20pokemon%29.mp3')
+            source.setAttribute('type', 'audio/ogg')
+
+            audio.appendChild(source)
+
+            soundBattle.append(audio)
+            $('.intro-bmg').remove()
+            
             document.querySelector('.capture-bmg').innerHTML =""
             triggerCapture.style.display = ""
             document.querySelector('.details').style.borderColor = "lightslategray";
@@ -184,6 +209,9 @@ $(document).ready(function(){
                 })
 
             })
+            }
+
+            
 
         })
 
