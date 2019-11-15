@@ -34,8 +34,6 @@ $(document).ready(function(){
     $('.play-btn').mouseout(function(e){
         $(this).css('transform', 'scale(1)')
         
-
-        
     })
     document.querySelector('.details').style.borderColor = "transparent";
     var triggerCapture = document.querySelector('.capture')
@@ -128,18 +126,7 @@ $(document).ready(function(){
             
             else{
                 triggerCapture.style.WebkitAnimationName = "myNEWmove";
-                var soundBattle = document.querySelector('.sound-battle')
-                soundBattle.innerHTML =""
-                var audio = document.createElement('audio')
-                audio.setAttribute('autoplay', 'true')
-                var source = document.createElement('source')
-                source.setAttribute('src', 'http://23.237.126.42/ost/pokemon-gameboy-sound-collection/gbhogmtx/107-battle%20%28vs%20wild%20pokemon%29.mp3')
-                source.setAttribute('type', 'audio/ogg')
-
-                audio.appendChild(source)
-
-                soundBattle.append(audio)
-                $('.intro-bmg').remove()
+                
                 
                 document.querySelector('.capture-bmg').innerHTML =""
                 triggerCapture.style.display = ""
@@ -159,6 +146,7 @@ $(document).ready(function(){
                         encPoke.stats.map(statElem =>{
                             stats.push(statElem.base_stat)
                         })
+                        
                         
                         var capImage = document.createElement('img')
                         capImage.setAttribute('class', 'capture-btn')
@@ -193,6 +181,19 @@ $(document).ready(function(){
 
                         capSpanHeader.innerText = `${encPoke.name}`.toUpperCase()
                         
+                        var soundBattle = document.querySelector('.sound-battle')
+                        soundBattle.innerHTML =""
+                        var audio = document.createElement('audio')
+                        audio.setAttribute('autoplay', 'true')
+                        audio.setAttribute('loop', 'true')
+                        var source = document.createElement('source')
+                        source.setAttribute('type', 'audio/ogg')
+                        source.setAttribute('src', `https://play.pokemonshowdown.com/audio/cries/${encPoke.name}.ogg`)
+                        
+                        audio.appendChild(source)
+
+                        soundBattle.append(audio)
+                        $('.intro-bmg').remove()
 
                         spanDiv.appendChild(capSpan)
                         spanDiv.appendChild(capSpan1)
